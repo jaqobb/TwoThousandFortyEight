@@ -36,7 +36,7 @@ namespace TwoThousandFortyEight
             {
                 Console.Write($"You provided a wrong value for the infinite mode state, please specify if you want your game to be in the infinite mode (true | false): ");
             }
-            Console.WriteLine();
+            Console.Clear();
             // The best loading screen there can be.
             // And yes, it doesn't actually do anything in the background, it just makes the user wait.
             // But why you might ask? No particular reason.
@@ -44,7 +44,6 @@ namespace TwoThousandFortyEight
             int    dotsAmount = 3;
             int    iteration  = 0;
             int    iterations = Utils.Random.Next(1, 4);
-            Console.Clear();
             while (iteration < iterations)
             {
                 Console.SetCursorPosition(0, 0);
