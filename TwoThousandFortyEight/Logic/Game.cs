@@ -6,50 +6,38 @@ namespace TwoThousandFortyEight.Logic
     public class Game
     {
         public readonly Board Board;
-        public int Points
-        {
-            get;
-            private set;
-        }
-        public int Moves
-        {
-            get;
-            private set;
-        }
+        public int Points { get; private set; }
+        public int Moves { get; private set; }
         public readonly bool InfiniteModeEnabled;
-        public bool HadFinalBlock
-        {
-            get;
-            private set;
-        }
+        public bool HadFinalBlock { get; private set; }
 
         public Game(int boardWidth, int boardHeight, bool infiniteModeEnabled)
         {
-            Board               = new Board(boardWidth, boardHeight);
-            Points              = 0;
-            Moves               = 0;
+            Board = new Board(boardWidth, boardHeight);
+            Points = 0;
+            Moves = 0;
             InfiniteModeEnabled = infiniteModeEnabled;
-            HadFinalBlock       = false;
+            HadFinalBlock = false;
         }
 
         public bool IsAbleToMove()
         {
-            for (int y = 0; y < Board.Height; y++)
+            for (var y = 0; y < Board.Height; y++)
             {
-                for (int x = 0; x < Board.Width; x++)
+                for (var x = 0; x < Board.Width; x++)
                 {
-                    int value = Board.Tiles[x, y];
+                    var value = Board.Tiles[x, y];
                     if (value == 0)
                     {
                         return true;
                     }
-                    foreach (Direction direction in Directions.Values)
+                    foreach (var direction in Directions.Values)
                     {
                         if (direction == Directions.Up && y == 0 || direction == Directions.Down && y == Board.Height - 1 || direction == Directions.Left && x == 0 || direction == Directions.Right && x == Board.Width - 1)
                         {
                             continue;
                         }
-                        int directionedValue = Board.Tiles[x + direction.Width, y + direction.Height];
+                        var directionedValue = Board.Tiles[x + direction.Width, y + direction.Height];
                         if (directionedValue == 0 || value / directionedValue == 1)
                         {
                             return true;
@@ -62,15 +50,15 @@ namespace TwoThousandFortyEight.Logic
 
         public void MakeMove(Direction direction)
         {
-            bool boardChanged = false;
+            var boardChanged = false;
             if (direction == Directions.Up)
             {
                 Movement:
-                for (int y = 0; y < Board.Height; y++)
+                for (var y = 0; y < Board.Height; y++)
                 {
-                    for (int x = 0; x < Board.Width; x++)
+                    for (var x = 0; x < Board.Width; x++)
                     {
-                        int value = Board.Tiles[x, y];
+                        var value = Board.Tiles[x, y];
                         if (value == 0)
                         {
                             continue;
@@ -90,11 +78,11 @@ namespace TwoThousandFortyEight.Logic
             if (direction == Directions.Down)
             {
                 Movement:
-                for (int y = Board.Height - 1; y >= 0; y--)
+                for (var y = Board.Height - 1; y >= 0; y--)
                 {
-                    for (int x = Board.Width - 1; x >= 0; x--)
+                    for (var x = Board.Width - 1; x >= 0; x--)
                     {
-                        int value = Board.Tiles[x, y];
+                        var value = Board.Tiles[x, y];
                         if (value == 0)
                         {
                             continue;
@@ -114,11 +102,11 @@ namespace TwoThousandFortyEight.Logic
             if (direction == Directions.Left)
             {
                 Movement:
-                for (int y = 0; y < Board.Height; y++)
+                for (var y = 0; y < Board.Height; y++)
                 {
-                    for (int x = 0; x < Board.Width; x++)
+                    for (var x = 0; x < Board.Width; x++)
                     {
-                        int value = Board.Tiles[x, y];
+                        var value = Board.Tiles[x, y];
                         if (value == 0)
                         {
                             continue;
@@ -138,11 +126,11 @@ namespace TwoThousandFortyEight.Logic
             if (direction == Directions.Right)
             {
                 Movement:
-                for (int y = Board.Height - 1; y >= 0; y--)
+                for (var y = Board.Height - 1; y >= 0; y--)
                 {
-                    for (int x = Board.Width - 1; x >= 0; x--)
+                    for (var x = Board.Width - 1; x >= 0; x--)
                     {
-                        int value = Board.Tiles[x, y];
+                        var value = Board.Tiles[x, y];
                         if (value == 0)
                         {
                             continue;
@@ -168,12 +156,12 @@ namespace TwoThousandFortyEight.Logic
 
         private bool MakeMove0(int x, int y, int value, Direction direction)
         {
-            int directionedValue = Board.Tiles[x + direction.Width, y + direction.Height];
+            var directionedValue = Board.Tiles[x + direction.Width, y + direction.Height];
             if (directionedValue != 0 && value / directionedValue != 1)
             {
                 return false;
             }
-            Board.Tiles[x, y]                                      = 0;
+            Board.Tiles[x, y] = 0;
             Board.Tiles[x + direction.Width, y + direction.Height] = value + directionedValue;
             if (directionedValue != 0)
             {
@@ -207,7 +195,7 @@ namespace TwoThousandFortyEight.Logic
             Console.WriteLine($"Moves: {Moves}");
             Console.WriteLine();
             Board.Render();
-            Direction? direction = Directions.Parse(Console.ReadKey().KeyChar);
+            var direction = Directions.Parse(Console.ReadKey().KeyChar);
             if (direction != null)
             {
                 MakeMove(direction);

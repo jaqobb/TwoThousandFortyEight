@@ -7,8 +7,8 @@ namespace TwoThousandFortyEight
 {
     internal static class Bootstrap
     {
-        private const int MinimumBoardWidth  = 4;
-        private const int MaximumBoardWidth  = 8;
+        private const int MinimumBoardWidth = 4;
+        private const int MaximumBoardWidth = 8;
         private const int MinimumBoardHeight = 4;
         private const int MaximumBoardHeight = 8;
 
@@ -18,8 +18,8 @@ namespace TwoThousandFortyEight
             Console.WriteLine("Welcome to 2048!");
             Console.WriteLine("Let's setup a few basic settings.");
             Console.WriteLine();
-            int  boardWidth;
-            int  boardHeight;
+            int boardWidth;
+            int boardHeight;
             bool infiniteModeEnabled;
             Console.Write($"Specify the width of the board ({MinimumBoardWidth}..{MaximumBoardWidth}): ");
             while (!int.TryParse(Console.ReadLine(), out boardWidth) || boardWidth is < MinimumBoardWidth or > MaximumBoardWidth)
@@ -40,15 +40,15 @@ namespace TwoThousandFortyEight
             // The best loading screen there can be.
             // And yes, it doesn't actually do anything in the background, it just makes the user wait.
             // But why you might ask? No particular reason.
-            int    dots       = 1;
-            int    dotsAmount = 3;
-            int    iteration  = 0;
-            int    iterations = Utils.Random.Next(1, 4);
+            var dots = 1;
+            var dotsAmount = 3;
+            var iteration = 0;
+            var iterations = Utils.Random.Next(1, 4);
             while (iteration < iterations)
             {
                 Console.SetCursorPosition(0, 0);
                 Console.Write("Setting up the game");
-                for (int dot = 0; dot < dots; dot++)
+                for (var dot = 0; dot < dots; dot++)
                 {
                     Console.Write(".");
                 }
@@ -64,7 +64,7 @@ namespace TwoThousandFortyEight
                 }
             }
             Console.Clear();
-            Game game = new Game(boardWidth, boardHeight, infiniteModeEnabled);
+            var game = new Game(boardWidth, boardHeight, infiniteModeEnabled);
             game.Start();
             while (!game.End())
             {
