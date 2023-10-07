@@ -31,10 +31,10 @@ namespace TwoThousandFortyEight
             {
                 Console.Write($"You provided a wrong height, please specify the height of the board ({MinimumBoardHeight}..{MaximumBoardHeight}): ");
             }
-            Console.Write("Specify if you want your game to be in the infinite mode. The game will not end once you get the 2048 tile and are in infinite mode (true | false): ");
+            Console.Write("Specify if you want your game to be in the infinite mode. In infinite mode, the game will not end once you get the 2048 tile (true | false): ");
             while (!bool.TryParse(Console.ReadLine(), out infiniteModeEnabled))
             {
-                Console.Write($"You provided a wrong value for the infinite mode state, please specify if you want your game to be in the infinite mode (true | false): ");
+                Console.Write("You provided a wrong value for the infinite mode state, please specify if you want your game to be in the infinite mode (true | false): ");
             }
             Console.Clear();
             // The best loading screen there can be.
